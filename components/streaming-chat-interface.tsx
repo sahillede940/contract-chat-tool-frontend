@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Upload, Send, FileText, Sparkles } from "lucide-react";
+import { Upload, Send, FileText } from "lucide-react";
 import axios from "axios";
 import { API_URL } from "@/constants";
 
