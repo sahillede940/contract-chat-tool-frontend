@@ -8,7 +8,6 @@ import ScrollArea  from "@/components/ui/scroll-area";
 import { Upload, Send, FileText } from "lucide-react";
 import axios from "axios";
 import { API_URL } from "@/constants";
-import ReactMarkdown from "react-markdown";
 import MarkdownRenderer from "./ui/MarkdownRenderer";
 
 type Message = {

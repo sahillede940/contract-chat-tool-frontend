@@ -14,10 +14,10 @@ interface MarkdownRendererProps {
 }
 
 const components: Components = {
-  ul: ({ node, ordered, ...props }: any) => <ul className="list-disc list-inside" {...props} />,
-  ol: ({ node, ordered, ...props }: any) => <ol className="list-decimal list-inside" {...props} />,
-  strong: ({ children }: any) => <strong className="font-bold">{children}</strong>,
-  p: ({ children }: any) => <p className="inline-block">{children}</p>,
+  ul: (props: React.ComponentProps<'ul'>) => <ul className="list-disc list-inside" {...props} />,
+  ol: (props: React.ComponentProps<'ol'>) => <ol className="list-decimal list-inside" {...props} />,
+  strong: (props: React.ComponentProps<'strong'>) => <strong className="font-bold">{props.children}</strong>,
+  p: (props: React.ComponentProps<'p'>) => <p className="inline-block">{props.children}</p>,
 };
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdownText }) => {
