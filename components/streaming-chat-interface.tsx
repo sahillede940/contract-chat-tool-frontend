@@ -4,10 +4,12 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import ScrollArea  from "@/components/ui/scroll-area";
 import { Upload, Send, FileText } from "lucide-react";
 import axios from "axios";
 import { API_URL } from "@/constants";
+import ReactMarkdown from "react-markdown";
+import MarkdownRenderer from "./ui/MarkdownRenderer";
 
 type Message = {
   role: "user" | "assistant";
@@ -172,24 +174,27 @@ export function StreamingChatInterface() {
         <Card className="flex-1 bg-[#1a1d27] mb-6 overflow-hidden border-gray-700 shadow-xl rounded-xl">
           <CardContent className="p-4 h-full flex flex-col">
             <h2 className="text-2xl font-bold mb-4 text-gray-100">Chat</h2>
-            <ScrollArea className="flex-1 pr-4" ref={chatContainerRef}>
-              {messages.map((message, index) => (
-                <div key={index} className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}>
-                  <div
-                    className={`inline-block p-4 rounded-2xl ${
-                      message.role === "user"
-                        ? "bg-[#4a5568] text-gray-100 rounded-br-none"
-                        : "bg-[#2d3748] text-gray-300 rounded-bl-none"
-                    } animate-fade-in transition-all duration-300 shadow-md`}
-                  >
-                    {message.content}
-                    {index === messages.length - 1 && message.role === "assistant" && isStreaming && (
-                      <span className="inline-block w-2 h-4 ml-1 bg-gray-400 animate-blink"></span>
-                    )}
+
+              <ScrollArea className="flex-1 pr-4" ref={chatContainerRef}>
+                {messages.map((message, index) => (
+                  <div key={index} className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}>
+                    <div
+                      className={`inline-block p-4 rounded-2xl ${
+                        message.role === "user"
+                          ? "bg-[#4a5568] text-gray-100 rounded-br-none"
+                          : "bg-[#2d3748] text-gray-300 rounded-bl-none"
+                      } animate-fade-in transition-all duration-300 shadow-md`}
+                    >
+                      <MarkdownRenderer markdownText={message.content} />
+
+                      {index === messages.length - 1 && message.role === "assistant" && isStreaming && (
+                        <span className="inline-block w-2 h-4 ml-1 bg-gray-400 animate-blink"></span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </ScrollArea>
+                ))}
+              </ScrollArea>
+
             <div className="flex mt-4">
               <Input
                 placeholder="Type your message..."
